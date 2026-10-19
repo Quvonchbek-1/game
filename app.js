@@ -1,4 +1,3 @@
-
 const PRODUCTS = [
     // BURGERLAR
     { id: "burger", name: "Classic Burger", category: "Burgerlar", emoji: "🍔", description: "Mazali go'shtli klassik burger", price: 35000, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58bd?auto=format&fit=crop&w=600&q=80" },
@@ -38,6 +37,49 @@ const PRODUCTS = [
     { id: "cake", name: "Cheesecake", category: "Shirinliklar", emoji: "🍰", description: "Shirin va yumshoq desert", price: 30000, image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80" },
     { id: "chocolate-cake", name: "Chocolate Cake", category: "Shirinliklar", emoji: "🍫", description: "Shokoladli mazali tort", price: 25000, image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" }
 ];
+
+// Telegram bot sozlamalari
+const BOT_TOKEN = '8804043531:AAFGu8P97sSX5KlEA0mIXbM-0mhCD1QZ2N0';
+const CHAT_ID = '7017606280';
+
+// Telegramga yuborish funksiyasi
+function sendToTelegram(orderData) {
+    const message = `
+📦 <b>Yangi Buyurtma! (#${orderData.number})</b>
+
+👤 <b>Buyurtmachi:</b> ${escapeText(orderData.customer.name)}
+📞 <b>Telefon:</b> ${escapeText(orderData.customer.phone)}
+📍 <b>Manzil:</b> ${escapeText(orderData.customer.address)}
+🛒 <b>Mahsulotlar:</b> ${orderData.items.map(i => `${i.name} ×${i.qty}`).join(", ")}
+💰 <b>Jami:</b> ${money(orderData.total)}
+💬 <b>Izoh:</b> ${escapeText(orderData.customer.note || 'Yo\'q')}
+    `;
+
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: message,
+            parse_mode: 'HTML'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            console.log('Buyurtma Telegramga muvaffaqiyatli yuborildi!');
+        } else {
+            console.error('Telegramga yuborishda xatolik:', data);
+        }
+    })
+    .catch(error => {
+        console.error('Xatolik yuz berdi:', error);
+    });
+}
 
 // Narxni formatlash
 function money(number) {
@@ -298,6 +340,9 @@ function acceptOrder(event) {
     saveData("cafeHouseCustomer", customer);
     saveData("cafeHouseCart", []);
 
+    // Telegram botga yuborish funksiyasini chaqirish
+    sendToTelegram(order);
+
     updateCount();
     renderOrder();
 
@@ -306,21 +351,21 @@ function acceptOrder(event) {
     const confirmation = document.getElementById("confirmation");
 
     if (!confirmation) {
-        alert("Buyurtma brauzerda saqlandi.");
+        alert("Buyurtma brauzerda saqlandi va Telegramga yuborildi.");
         return;
     }
 
     confirmation.hidden = false;
 
     confirmation.innerHTML = `
-        <h3>✅ Buyurtmangiz qabul qilindi!</h3>
+        <h3>✅ Buyurtmangiz qabul qilindi va Telegramga yuborildi!</h3>
         <p><b>Buyurtma raqami:</b> ${String(order.number).slice(-7)}</p>
         <p><b>Buyurtmachi:</b> ${escapeText(customer.name)}</p>
         <p><b>Telefon:</b> ${escapeText(customer.phone)}</p>
         <p><b>Manzil:</b> ${escapeText(customer.address)}</p>
         <p><b>Mahsulotlar:</b>
             ${items.map(item =>
-                `${escapeText(item.name)} × ${item.qty}`
+                `${escapeText(item.name)} ×${item.qty}`
             ).join(", ")}
         </p>
         <p><b>Jami:</b> ${money(total)}</p>
@@ -328,8 +373,7 @@ function acceptOrder(event) {
             ? `<p><b>Izoh:</b> ${escapeText(customer.note)}</p>`
             : ""}
         <p class="muted">
-            Buyurtma ushbu brauzerda saqlandi.
-            Telegramga yuborish hali ulanmagan.
+            Buyurtma muvaffaqiyatli rasmiylashtirildi va botga jo'natildi.
         </p>
         <a href="menu.html" class="btn">Yana buyurtma berish</a>
     `;
@@ -345,6 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadCustomer();
 
     // Kategoriya tugmalarini ishlatish
+    document.querySelectorAll(".category-btn").button?.addEventListener(...); // agar mavjud bo'lsa
     document.querySelectorAll(".category-btn").forEach(button => {
         button.addEventListener("click", () => {
             activeCategory = button.dataset.category;
@@ -364,43 +409,3 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", acceptOrder);
     }
 });
-const BOT_TOKEN = '8804043531:AAFGu8P97sSX5KlEA0mIXbM-0mhCD1QZ2N0';
-const CHAT_ID = '7017606280';
-
-function sendToTelegram(orderData) {
-    const message = `
-📦 <b>Yangi Buyurtma! (#${orderData.id})</b>
-
-👤 <b>Buyurtmachi:</b> ${orderData.name}
-📞 <b>Telefon:</b> ${orderData.phone}
-📍 <b>Manzil:</b> ${orderData.address}
-🛒 <b>Mahsulotlar:</b> ${orderData.items}
-💰 <b>Jami:</b> ${orderData.total}
-💬 <b>Izoh:</b> ${orderData.comment || 'Yo\'q'}
-    `;
-
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            chat_id: CHAT_ID,
-            text: message,
-            parse_mode: 'HTML'
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.ok) {
-            console.log('Buyurtma Telegramga muvaffaqiyatli yuborildi!');
-        } else {
-            console.error('Telegramga yuborishda xatolik:', data);
-        }
-    })
-    .catch(error => {
-        console.error('Xatolik yuz berdi:', error);
-    });
-}
