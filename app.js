@@ -364,3 +364,43 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", acceptOrder);
     }
 });
+const BOT_TOKEN = '8804043531:AAFGu8P97sSX5KlEA0mIXbM-0mhCD1QZ2N0';
+const CHAT_ID = '7017606280';
+
+function sendToTelegram(orderData) {
+    const message = `
+📦 <b>Yangi Buyurtma! (#${orderData.id})</b>
+
+👤 <b>Buyurtmachi:</b> ${orderData.name}
+📞 <b>Telefon:</b> ${orderData.phone}
+📍 <b>Manzil:</b> ${orderData.address}
+🛒 <b>Mahsulotlar:</b> ${orderData.items}
+💰 <b>Jami:</b> ${orderData.total}
+💬 <b>Izoh:</b> ${orderData.comment || 'Yo\'q'}
+    `;
+
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: message,
+            parse_mode: 'HTML'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            console.log('Buyurtma Telegramga muvaffaqiyatli yuborildi!');
+        } else {
+            console.error('Telegramga yuborishda xatolik:', data);
+        }
+    })
+    .catch(error => {
+        console.error('Xatolik yuz berdi:', error);
+    });
+}
