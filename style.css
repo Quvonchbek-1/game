@@ -1,0 +1,580 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+:root {
+    --brown: #3b2418;
+    --gold: #f5c16c;
+    --cream: #f7f1e8;
+    --muted: #79695f;
+}
+
+body {
+    background: var(--cream);
+    color: var(--brown);
+    min-height: 100vh;
+}
+
+header {
+    background: var(--brown);
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    color: var(--gold);
+    font-size: 26px;
+}
+
+nav {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+main {
+    width: 92%;
+    max-width: 1100px;
+    margin: 32px auto;
+    min-height: 65vh;
+}
+
+.hero {
+    min-height: 440px;
+    border-radius: 22px;
+    background:
+        linear-gradient(90deg, #1d100de8, #1d100d55),
+        url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
+    display: flex;
+    align-items: center;
+    padding: 55px;
+    color: white;
+}
+
+.hero-content {
+    max-width: 570px;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.hero h2 {
+    font-size: clamp(38px, 6vw, 62px);
+    line-height: 1.1;
+    margin-bottom: 18px;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--brown);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.gold {
+    background: var(--gold);
+    color: var(--brown);
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+.welcome {
+    text-align: center;
+    padding: 45px 10px;
+}
+
+.welcome h2 {
+    margin-bottom: 15px;
+}
+
+.welcome p {
+    color: var(--muted);
+    margin-bottom: 22px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 34px;
+    margin: 12px 0;
+}
+
+.intro {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 28px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    );
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 17px;
+    box-shadow: 0 7px 22px #3b241814;
+}
+
+.card img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.card h3 {
+    margin: 13px 0 8px;
+    font-size: 21px;
+}
+
+.card p {
+    color: var(--muted);
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #a76513;
+    margin: 14px 0;
+}
+
+.card button {
+    width: 100%;
+    border: none;
+    border-radius: 9px;
+    background: var(--brown);
+    color: white;
+    padding: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.card button.added {
+    background: #356b43;
+}
+
+.next-step {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 28px;
+}
+
+.muted {
+    color: var(--muted);
+    margin-top: 7px;
+    line-height: 1.5;
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.panel {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px #0000000d;
+}
+
+.panel h3 {
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+.order-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 0;
+    border-bottom: 1px solid #eee;
+    line-height: 1.5;
+}
+
+.total {
+    text-align: right;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 22px 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 13px 0 7px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d9cec5;
+    border-radius: 9px;
+    font-size: 15px;
+    background: white;
+}
+
+textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+.submit {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.empty {
+    padding: 22px 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.confirmation {
+    margin-top: 24px;
+    border: 2px solid #9bc5a2;
+}
+
+.confirmation h3 {
+    color: #28643a;
+}
+
+.confirmation p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.small {
+    font-size: 13px;
+}
+
+footer {
+    background: #24150e;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    margin-top: 35px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 720px) {
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        padding: 17px 5%;
+    }
+
+    nav {
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .hero {
+        min-height: 380px;
+        padding: 25px;
+    }
+
+    .next-step {
+        align-items: flex-start;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+}
+
+/* Bosh sahifa navigatsiyasi */
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.home-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.home-header nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.home-header nav a:hover {
+    color: #f5c16c;
+}
+
+/* Mashhur mahsulotlar */
+.home-products,
+.benefits,
+.contact {
+    padding: 55px 8%;
+    text-align: center;
+}
+
+.featured-grid,
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin: 30px 0;
+}
+
+.featured-card,
+.benefit-grid article {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 5px 20px #3b241815;
+}
+
+.featured-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.featured-card strong {
+    display: block;
+    margin: 15px 0;
+}
+
+.featured-card .btn {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.benefit-grid article span {
+    font-size: 36px;
+}
+
+/* Maxsus taklif */
+.special-offer {
+    background: #3b2418;
+    color: white;
+    padding: 55px 8%;
+    text-align: center;
+}
+
+.special-offer h2 {
+    color: #f5c16c;
+}
+
+/* Aloqa va footer */
+.contact {
+    background: #f0e4d5;
+}
+
+.home-footer {
+    background: #3b2418;
+    color: white;
+    text-align: center;
+    padding: 24px;
+}
+
+@media (max-width: 750px) {
+    .featured-grid,
+    .benefit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .home-products,
+    .benefits,
+    .contact {
+        padding: 35px 5%;
+    }
+}
+
+/* Buyurtma sahifasi qo'shimchalari */
+#order-form select,
+#order-form input,
+#order-form textarea {
+    width: 100%;
+    padding: 13px;
+    margin: 8px 0 16px;
+    border: 1px solid #dfc9ad;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font: inherit;
+    background: #fff;
+}
+
+.price-summary {
+    background: #f7f1e8;
+    padding: 18px;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.price-summary > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.price-summary .grand-total {
+    border-top: 1px solid #d9c5ae;
+    padding-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#order-form .submit {
+    width: 100%;
+    cursor: pointer;
+}
+
+#order-form input:focus,
+#order-form select:focus,
+#order-form textarea:focus {
+    outline: 2px solid #c58c45;
+    border-color: #c58c45;
+}
+
+.confirmation {
+    border-left: 5px solid #43875b;
+    padding: 20px;
+}
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 25px 0;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 15px #00000012;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.card h3 {
+    margin: 14px 0 8px;
+}
+
+.card p {
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.card .price {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+.card button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #3b2418;
+    color: white;
+    cursor: pointer;
+}
+
+.card button.added {
+    background: #267547;
+}
+
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.category-btn {
+    padding: 12px 20px;
+    border: 1px solid #3b2418;
+    border-radius: 25px;
+    background: white;
+    color: #3b2418;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: #3b2418;
+    color: white;
+}

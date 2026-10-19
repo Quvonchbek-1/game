@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe House — Buyurtma</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+<header>
+    <h1>☕ Cafe House</h1>
+    <nav>
+        <a href="index.html">Bosh sahifa</a>
+        <a href="menu.html">Menyuga qaytish</a>
+    </nav>
+</header>
+
+<main>
+    <h2 class="page-title">📦 Buyurtmangiz</h2>
+
+    <div class="checkout-grid">
+
+        <section class="panel">
+            <h3>🛒 Tanlangan mahsulotlar</h3>
+
+            <div id="order-items"></div>
+
+            
+<div class="price-summary">
+    <div>
+        <span>Mahsulotlar narxi:</span>
+        <strong id="subtotal">0 so'm</strong>
+    </div>
+
+    <div>
+        <span>Yetkazib berish:</span>
+        <strong id="delivery-cost">0 so'm</strong>
+    </div>
+
+    <div class="grand-total">
+        <span>Jami to'lov:</span>
+        <strong id="order-total">0 so'm</strong>
+    </div>
+</div>
+
+
+            <a href="menu.html" class="btn">
+                ← Menyuga qaytish
+            </a>
+        </section>
+
+        <section class="panel">
+            <h3>👤 Buyurtmachi ma'lumotlari</h3>
+
+            <form id="order-form">
+
+                <label for="customer-name">Ism va familiya</label>
+                <input
+                    id="customer-name"
+                    name="name"
+                    type="text"
+                    placeholder="Ismingizni kiriting"
+                    required
+                >
+
+                <label for="customer-phone">Telefon raqami</label>
+                <input
+                    id="customer-phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+998 90 123 45 67"
+                    required
+                >
+
+                <label for="customer-address">Yetkazib berish manzili</label>
+
+<!-- Yetkazib berish usuli -->
+<label for="delivery-method">🚚 Yetkazib berish usuli</label>
+<select id="delivery-method" name="delivery" required>
+    <option value="delivery">Manzilga yetkazish</option>
+    <option value="pickup">Kafedan olib ketish</option>
+</select>
+
+<!-- Yetkazib berish vaqti -->
+<label for="delivery-time">🕒 Yetkazib berish vaqti</label>
+<select id="delivery-time" name="time" required>
+    <option value="asap">Imkon qadar tezroq</option>
+    <option value="12:00-13:00">12:00–13:00</option>
+    <option value="13:00-14:00">13:00–14:00</option>
+    <option value="14:00-15:00">14:00–15:00</option>
+    <option value="18:00-19:00">18:00–19:00</option>
+</select>
+
+<!-- To'lov usuli -->
+<label for="payment-method">💳 To'lov usuli</label>
+<select id="payment-method" name="payment" required>
+    <option value="cash">Naqd pul</option>
+    <option value="card">Karta orqali</option>
+    <option value="upon-delivery">Yetkazilganda to'lash</option>
+</select>
+
+                <textarea
+                    id="customer-address"
+                    name="address"
+                    placeholder="Tuman, ko'cha, uy"
+                    required
+                ></textarea>
+
+                <label for="customer-note">Qo'shimcha izoh</label>
+                <textarea
+                    id="customer-note"
+                    name="note"
+                    placeholder="Ixtiyoriy"
+                ></textarea>
+
+                <button type="submit" class="btn gold submit">
+                    ✅ Buyurtmani qabul qilish
+                </button>
+
+            </form>
+        </section>
+
+    </div>
+
+    <section id="confirmation" class="panel confirmation" hidden></section>
+</main>
+
+<footer>© 2026 Cafe House</footer>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe House — Menyu</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Cafe House</h1>
+
+        <nav>
+            <a href="index.html">Bosh sahifa</a>
+            <a href="menu.html">Menyu</a>
+            <a href="order.html">Buyurtma 🛒
+                <span id="cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="menu-container">
+        <h1>Bizning menyu</h1>
+        <p>O‘zingizga yoqqan taomni tanlang va buyurtma bering!</p>
+
+        <div class="categories">
+            <button class="category-btn" data-category="Hammasi">Hammasi</button>
+            <button class="category-btn" data-category="Burgerlar">🍔 Burgerlar</button>
+            <button class="category-btn" data-category="Pitsalar">🍕 Pitsalar</button>
+            <button class="category-btn" data-category="Taomlar">🍽️ Taomlar</button>
+            <button class="category-btn" data-category="Ichimliklar">🥤 Ichimliklar</button>
+            <button class="category-btn" data-category="Shirinliklar">🍰 Shirinliklar</button>
+        </div>
+
+        <!-- Taomlar va narxlar shu yerda chiqadi -->
+        <div id="products" class="products"></div>
+    </main>
+
+    <footer>
+        <p>© 2026 Cafe House | Mazali taomlar maskani</p>
+    </footer>
+
+</body>
+</html>
